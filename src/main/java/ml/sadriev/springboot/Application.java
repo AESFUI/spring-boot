@@ -1,9 +1,8 @@
 package ml.sadriev.springboot;
 
 import javax.annotation.Resource;
-import ml.sadriev.springboot.enums.RoleType;
-import ml.sadriev.springboot.model.Users;
-import ml.sadriev.springboot.service.UsersService;
+import ml.sadriev.springboot.model.Book;
+import ml.sadriev.springboot.service.BooksService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -13,38 +12,37 @@ import org.springframework.context.event.EventListener;
 public class Application {
 
 	@Resource
-	private UsersService usersService;
+	private BooksService booksService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	private void testJpaMethods() throws Exception {
+	public void testJpaMethods() throws Exception {
 		init();
 
-		usersService.findAll().forEach(System.out::println);
+		booksService.findAll().forEach(System.out::println);
 
-/*		usersService.findAll().forEach(it-> System.out.println(it));
+/*		booksService.findAll().forEach(it-> System.out.println(it));
 
-		usersService.findAllByName("Smith").forEach(it-> System.out.println(it));
+		booksService.findAllByName("Smith").forEach(it-> System.out.println(it));
 
-		usersService.findWhereNameStartsFromSmith().forEach(it-> System.out.println(it));*/
+		booksService.findWhereNameStartsFromSmith().forEach(it-> System.out.println(it));*/
 	}
 
-	private void initUser(final String nickName, final String password, final RoleType roleType) throws Exception {
-		final Users user = usersService.findUserByNickName(nickName);
-		if (user != null) {
+	private void initBook(final String name, final String author, final double price) throws Exception {
+		final Book book = booksService.findUserByLogin(name);
+		if (book != null) {
 			return;
 		}
-		usersService.createUser(nickName, password, roleType);
+		booksService.createBook(name, author, price);
 	}
 
 	private void init() throws Exception {
-		initUser("admin", "admin", RoleType.ADMIN);
-		initUser("user", "user", RoleType.USER);
-		initUser("user2", "user2", RoleType.USER);
-		initUser("user3", "user3", RoleType.USER);
+		initBook("Как управлять Вселенной", "Степан Разин", 123.45);
+		initBook("Кот, который нюхал клей", "Иоанн Васильевич Грозный", 34.56);
+		initBook("Синяя книга белорусского алкоголика", "Васиссуалий Лоханкин", 200);
+		initBook("Чапаев и пустота", "Фрося Бурлакова", 99.99);
 	}
-
 }
