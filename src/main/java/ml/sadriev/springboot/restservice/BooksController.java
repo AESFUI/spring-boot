@@ -19,19 +19,19 @@ public class BooksController {
     BooksRepository booksRepository;
 
     @PostMapping("/create")
-    public String create(@RequestBody UsersUI book) {
-        booksRepository.save(new Book(book.getLogin(), book.getRealName()));
+    public String create(@RequestBody Book book) {
+        booksRepository.save(new Book(book.getName(), book.getAuthor(), book.getPrice()));
         return "Book is created";
     }
 
     @GetMapping("/findallbooks")
-    public List<UsersUI> findAll() {
+    public List<Book> findAll() {
         List<Book> books = (List<Book>) booksRepository.findAll();
-        List<UsersUI> booksUI = new ArrayList<>();
+        List<Book> booksResponce = new ArrayList<>();
         for (Book book : books) {
-            booksUI.add(new UsersUI(book.getLogin(), book.getRealName()));
+            booksResponce.add(new Book(book.getName(), book.getAuthor(), book.getPrice()));
         }
-        return booksUI;
+        return booksResponce;
     }
 
     @RequestMapping("/search/{id}")
@@ -42,12 +42,12 @@ public class BooksController {
     }
 
     @RequestMapping("/searchbyrealname/{firstname}")
-    public List<UsersUI> fetchDataByFirstName(@PathVariable String firstname) {
+    public List<Book> fetchDataByFirstName(@PathVariable String firstname) {
         List<Book> books = booksRepository.findBooksByAuthor(firstname);
-        List<UsersUI> booksUI = new ArrayList<>();
+        List<Book> booksResponce = new ArrayList<>();
         for (Book book : books) {
-            booksUI.add(new UsersUI(book.getLogin(), book.getRealName()));
+            booksResponce.add(new Book(book.getName(), book.getAuthor(), book.getPrice()));
         }
-        return booksUI;
+        return booksResponce;
     }
 }
