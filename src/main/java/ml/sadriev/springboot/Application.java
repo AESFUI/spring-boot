@@ -32,7 +32,7 @@ public class Application {
 	}
 
 	private void initBook(final String name, final String author, final double price) throws Exception {
-		final Book book = booksService.findUserByLogin(name);
+		final Book book = booksService.findBookByName(name);
 		if (book != null) {
 			return;
 		}

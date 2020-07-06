@@ -15,7 +15,7 @@ public class BooksService {
     @Resource
     private final BooksRepository booksRepository;
 
-    public Book findUserByLogin(String name) throws Exception {
+    public Book findBookByName(String name) throws Exception {
         return booksRepository.findBookByName(name);
     }
 
@@ -30,5 +30,10 @@ public class BooksService {
         book.setAuthor(author);
         book.setPrice(price);
         booksRepository.save(book);
+    }
+
+    @Transactional
+    public void deleteBookByName(final String name) {
+        booksRepository.deleteBookByName(name);
     }
 }

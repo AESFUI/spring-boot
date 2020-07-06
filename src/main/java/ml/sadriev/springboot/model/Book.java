@@ -19,13 +19,13 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
 
-    @Column(length = 32, unique = true, updatable = false, nullable = false)
+    @Column(length = 60, unique = true, updatable = false, nullable = false)
     private String name;
 
-    @Column(length = 32, unique = false, updatable = false, nullable = false)
+    @Column(length = 60, unique = false, updatable = false, nullable = false)
     private String author;
 
-    @Column(length = 32, unique = false, updatable = true, nullable = false)
+    @Column(unique = false, updatable = true, nullable = false)
     private double price;
 
     public Book(String name, String author, double price) {
