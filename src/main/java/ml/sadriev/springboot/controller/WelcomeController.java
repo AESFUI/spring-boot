@@ -3,14 +3,13 @@ package ml.sadriev.springboot.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/index.html")
-public class IndexController {
+@RequestMapping("/welcome.html")
+public class WelcomeController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/welcome")
     public String index(Model model) {
-        return "index";
+        return "welcome";
     }
 }

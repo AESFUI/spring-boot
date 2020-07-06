@@ -1,5 +1,6 @@
 package ml.sadriev.springboot.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import lombok.AllArgsConstructor;
@@ -15,11 +16,11 @@ public class BooksService {
     @Resource
     private final BooksRepository booksRepository;
 
-    public Book findBookByName(String name) throws Exception {
+    public Book findBookByName(String name) {
         return booksRepository.findBookByName(name);
     }
 
-    public List<Book> findAll() throws Exception {
+    public List<Book> findAll() {
         return (List<Book>) booksRepository.findAll();
     }
 
