@@ -1,7 +1,6 @@
 <html>
-
 <head>
-    <title>First Web Application</title>
+    <title>Book shop</title>
 </head>
 
 <body>
